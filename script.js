@@ -1,18 +1,15 @@
-let qtdcartas = 0;
+let qtdcartas = 14;
 let par = 0;
 
-/* let div = [];
-let qtdimagens = []; */
-
 /*
-while(qtdcartas<4 || qtdcartas>15 || par!==0){
-    qtdcartas=prompt("Quantas cartas...?");
+while(qtdcartas<4 || qtdcartas>14 || par!==0){
+    qtdcartas=prompt("Com quantas cartas quer jogar?");
     qtdcartas=parseInt(qtdcartas);
     par = qtdcartas%2;
 }
 */
 
-let main = document.querySelector("main")
+let main = document.querySelector(".main")
 const images = [
     "bobrossparrot.gif",
     "explodyparrot.gif",
@@ -23,15 +20,17 @@ const images = [
     "unicornparrot.gif"
 ];
 
-let div = []
+let arrayDeCartas = [];
 
-for(let i = 0; i < images.length; i++){
-    main.innerHTML = main.innerHTML + `
-    <div class="card-box">
-    <img src=images/${images[i]} alt="Parrot">
-</div>
-
-   `
+for (let a = 0; a < qtdcartas / 2; a++){
+    arrayDeCartas.push(images[a]);
+    arrayDeCartas.push(images[a]);
 }
 
-main.innerHTML = div;
+for(let i = 0; i < arrayDeCartas.length; i++){
+    main.innerHTML += `
+    <div class="card-box">
+    <img src="images/${arrayDeCartas[i]}" alt="Parrot">
+    <img src="images/front.png">
+</div>`;
+}
