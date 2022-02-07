@@ -4,15 +4,7 @@ function start() {
     Time = 0;
     CanFlip = [];
     Compare = [];
-    images = [
-    "front-0.gif",
-    "front-1.gif",
-    "front-2.gif",
-    "front-3.gif",
-    "front-4.gif",
-    "front-5.gif",
-    "front-6.gif"
-];
+    images = [];
     GameOver = false;
     CanSelect = true;
   
@@ -43,11 +35,11 @@ function start() {
   
     for (let i = 0; i < qntCards; i++) {
       cards += `
-        <div id="card${i}" class="card" onclick="flipCard(this)">
+        <div id="card${i}" class="card" onclick="flipCard(this)" data-identifier="card">
           <div class="back appearance">
-            <img src="imgs/back.png">
+            <img src="imgs/back.png" data-identifier="back-face">
           </div>
-          <div class="front appearance flip">
+          <div class="front appearance flip" data-identifier="front-face">
             <img src="imgs/front-${images[i]}.gif">
           </div>
         </div>
@@ -120,6 +112,37 @@ function flip(card) {
     card.querySelector(".back").classList.toggle("flip");
     card.querySelector(".front").classList.toggle("flip");
 }
+
+function validateEndGame() {
+  for (let i = 0; i < CanFlip.length; i++) {
+      if (CanFlip[i]) {
+          return;
+      }
+  }
+
+  GameOver = true;
+
+  stopTime();
+
+  setTimeout(function(){endGame()}, 500);
+}
+
+function endGame() {
+  alert("Você ganhou em " + Moves + " jogadas e em " + strTime() + " minutos");
+
+  var restart = "";
+  while (restart !== "s" && restart !== "S" && restart !== "n" && restart !== "N") {
+      restart = prompt("Deseja jogar novamente? (s ou n)");
+  }
+
+  if (restart == "s" || restart == "S") {
+      start();
+  }
+}
+
+
+
+
 
 
 
